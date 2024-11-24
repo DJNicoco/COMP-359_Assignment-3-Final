@@ -1,120 +1,266 @@
 import matplotlib.pyplot as plt
+import networkx as nx
+import sys
 
-# Function Definitions
-def optimal_bst(keys, p, q, n):
-    # Construct an Optimal BST and compute the minimum search cost.
-    cost = [[0 for _ in range(n + 1)] for _ in range(n + 1)]
-    root = [[0 for _ in range(n + 1)] for _ in range(n + 1)]
+class TreeNode:
+    """A node in a binary tree."""
+    def __init__(self, value, probability=1.0):
+        self.value = value
+        self.probability = probability
+        self.left = None
+        self.right = None
 
-    # Initialize the diagonal of cost matrix
-    for i in range(n + 1):
-        cost[i][i] = q[i]
+    def add_left(self, node):
+        self.left = node
 
-    # Iterate over chain lengths
-    for length in range(1, n + 1):
-        for i in range(n - length + 1):
-            j = i + length
-            cost[i][j] = float('inf')
-            total_prob = sum(p[i:j]) + sum(q[i:j + 1])
-            for r in range(i, j):  # Try every root
-                c = cost[i][r] + cost[r + 1][j] + total_prob
-                if c < cost[i][j]:
-                    cost[i][j] = round(c, 2)  # Round to 2 decimal places
-                    root[i][j] = r
+    def add_right(self, node):
+        self.right = node
 
-    return cost, root
 
-def construct_obst(root, keys, i, j):
-    # Construct the tree structure from the root matrix.
-    if i >= j:
+class ColorCombinationTreeWithProbabilities:
+    # This handles the creation of trees and an optimal BST with probabilities
+    def __init__(self):
+        self.color_probabilities = {}  # This stores probabilities of individual colors
+        self.combinations = []  # This tores individual color combinations
+
+    def add_color(self, color, probability):
+        """Adds a color with its probability."""
+        self.color_probabilities[color] = probability
+
+    def add_combination(self, color1, color2):
+        # This adds a combination of two colors and generates the resulting color
+        result = self.combine_colors(color1, color2)
+        if result == 'unknown':
+            print(f"Combination of {color1} and {color2} is not recognized.")
+        else:
+            probability = (
+                self.color_probabilities.get(color1, 1.0)
+                * self.color_probabilities.get(color2, 1.0)
+            )
+            # This rounds the probability to 2 decimal places
+            probability = round(probability, 2) 
+            
+            # This add the combination to the list with rounded probabilities
+            self.combinations.append((color1, color2, result, probability))
+            
+            # This builds the tree for the combination
+            tree = self.build_small_tree(color1, color2, result, probability)
+            
+            # This prints and visualizes the tree
+            print(f"\nTree for combination {color1} + {color2} = {result} (Probability: {probability}):")
+            self.visualize_tree(tree, f"combination_{color1}_{color2}_{result}")
+
+    def combine_colors(self, color1, color2):
+        """Automatically determines the result of combining two colors."""
+        color_combinations = {
+            ('red', 'blue'): 'purple',
+            ('blue', 'yellow'): 'green',
+            ('red', 'yellow'): 'orange',
+            ('blue', 'green'): 'cyan',
+            ('red', 'green'): 'brown',
+            ('yellow', 'green'): 'lime',
+            ('black', 'white'): 'gray',
+            ('red', 'white'): 'pink',
+            ('blue', 'black'): 'navy',
+        }
+        
+        # Handle reverse combinations (e.g., 'blue' + 'red' -> 'purple')
+        if (color2, color1) in color_combinations:
+            return color_combinations[(color2, color1)]
+        
+        # If not found in the dictionary, return 'unknown'
+        return color_combinations.get((color1, color2), 'unknown')
+
+    def build_small_tree(self, color1, color2, result, probability):
+        """Builds a binary tree for two colors and their result."""
+        root = TreeNode(result, probability)
+        root.add_left(TreeNode(color1, self.color_probabilities.get(color1, 1.0)))
+        root.add_right(TreeNode(color2, self.color_probabilities.get(color2, 1.0)))
+        return root
+
+    def build_optimal_bst(self):
+        """Builds an optimal binary search tree using the combinations and probabilities."""
+        # Create a dictionary to store the TreeNode for each color and result
+        node_map = {}
+
+        # Helper function to retrieve or create nodes
+        def get_node(value, probability=1.0):
+            if value not in node_map:
+                node_map[value] = TreeNode(value, probability)
+            return node_map[value]
+
+        # Iterate through all combinations and build the tree
+        for color1, color2, result, probability in self.combinations:
+            # Get or create nodes for the result and the two input colors
+            result_node = get_node(result, probability)
+            color1_node = get_node(color1, self.color_probabilities.get(color1, 1.0))
+            color2_node = get_node(color2, self.color_probabilities.get(color2, 1.0))
+
+            # If the result node doesn't already have children, assign them
+            if result_node.left is None:
+                result_node.add_left(color1_node)
+            if result_node.right is None:
+                result_node.add_right(color2_node)
+
+        # Find the root node (the last combination's result will be the tree root)
+        if self.combinations:
+            final_result = self.combinations[-1][2]
+            return node_map[final_result]
+
         return None
-    r = root[i][j]
-    return {
-        "key": keys[r],
-        "left": construct_obst(root, keys, i, r),
-        "right": construct_obst(root, keys, r + 1, j)
-    }
 
-def plot_tree(tree, x=0, y=0, level_gap=1, x_gap=2, ax=None):
-    # Visualize the binary tree using matplotlib.
-    if ax is None:
-        fig, ax = plt.subplots(figsize=(10, 6))
+    def hierarchical_layout(self, root):
+        """Creates a custom hierarchical layout for a tree."""
+        def traverse(node, x=0, depth=0, pos=None, width=1):
+            if not pos:
+                pos = {}
+            if node:
+                pos[str(id(node))] = (x, -depth)  # Position nodes based on depth
+                dx = width / 2  # Spread children based on width
+                traverse(node.left, x - dx, depth + 1, pos, width / 2)
+                traverse(node.right, x + dx, depth + 1, pos, width / 2)
+            return pos
 
-    if tree:
-        ax.text(x, y, str(tree["key"]), fontsize=12, ha='center',
-                bbox=dict(facecolor='skyblue', edgecolor='black', boxstyle='round,pad=0.5'))
+        return traverse(root)
 
-        # Plot left child
-        if tree["left"]:
-            child_x, child_y = x - x_gap, y - level_gap
-            ax.plot([x, child_x], [y, child_y], color='black')  # Draw edge
-            plot_tree(tree["left"], child_x, child_y, level_gap, x_gap / 2, ax)
+    def get_color_hex(self, color_name):
+        """Returns the corresponding hex color value for a given color name."""
+        color_map = {
+            'red': '#FF0000',
+            'blue': '#0000FF',
+            'yellow': '#FFFF00',
+            'green': '#008000',
+            'orange': '#FFA500',
+            'purple': '#800080',
+            'cyan': '#00FFFF',
+            'brown': '#A52A2A',
+            'lime': '#00FF00',
+            'gray': '#808080',
+            'pink': '#FFC0CB',
+            'navy': '#000080',
+            'black': '#000000',
+            'white': '#FFFFFF'
+        }
+        return color_map.get(color_name.lower(), '#FFFFFF')  # Default to white if color not found
 
-        # Plot right child
-        if tree["right"]:
-            child_x, child_y = x + x_gap, y - level_gap
-            ax.plot([x, child_x], [y, child_y], color='black')  # Draw edge
-            plot_tree(tree["right"], child_x, child_y, level_gap, x_gap / 2, ax)
+    def visualize_tree(self, root, filename):
+        """Visualizes the tree in a hierarchical format and saves it as a PNG file."""
+        G = nx.DiGraph()
 
-    ax.axis('off')
-    if ax is None:
-        plt.show()
+        def add_edges(node):
+            if node:
+                current_id = str(id(node))
+                label = f"{node.value}\nP={node.probability:.2f}"
+                color = self.get_color_hex(node.value)  # Get the color for the node
+                G.add_node(current_id, label=label, color=color)
+                if node.left:
+                    G.add_edge(current_id, str(id(node.left)))
+                    add_edges(node.left)
+                if node.right:
+                    G.add_edge(current_id, str(id(node.right)))
+                    add_edges(node.right)
 
-def tree_to_dot(tree):
-    # Converts the tree structure to DOT format.
-    dot_string = "digraph OptimalBST {\n"
-    
-    def add_edges(node):
-        nonlocal dot_string
-        if node:
-            if node['left']:
-                dot_string += f'    {node["key"]} -> {node["left"]["key"]};\n'
-                add_edges(node['left'])
-            if node['right']:
-                dot_string += f'    {node["key"]} -> {node["right"]["key"]};\n'
-                add_edges(node['right'])
+        # Start adding edges from the root
+        add_edges(root)
 
-    add_edges(tree)
-    dot_string += "}\n"
-    return dot_string
+        # Get node colors
+        node_colors = [G.nodes[node]['color'] for node in G.nodes]
 
-def save_dot_file(dot_string, filename="optimal_bst.dot"):
-    # Saves the DOT format string to a file.
-    with open(filename, 'w') as f:
-        f.write(dot_string)
+        # Use the hierarchical layout
+        pos = self.hierarchical_layout(root)
+        labels = nx.get_node_attributes(G, 'label')
+        nx.draw(
+            G,
+            pos,
+            with_labels=True,
+            labels=labels,
+            node_color=node_colors,
+            font_size=10,
+            node_size=3000,
+            font_color="white",
+        )
+
+        # Save the tree visualization as a PNG file
+        plt.title(f"Tree Visualization for {filename}")
+        plt.savefig(f"{filename}_tree.png", format="png")
+        plt.close()
+
+        print(f"Tree saved as {filename}_tree.png")
+
+    def visualize_full_bst(self, root):
+        """Visualizes the full optimal binary search tree in a hierarchical format."""
+        self.visualize_tree(root, "full_optimal_bst")
+
+    def optimal_bst_probabilities(self, probs):
+        """Dynamic programming approach to find optimal BST given probabilities."""
+        n = len(probs)
+        # dp[i][j] will store the minimum cost of BST from i to j
+        dp = [[0] * n for _ in range(n)]
+        # sum_probs[i][j] will store the sum of probabilities from i to j
+        sum_probs = [[0] * n for _ in range(n)]
+
+        # Calculate the sum of probabilities for ranges [i, j]
+        for i in range(n):
+            sum_probs[i][i] = probs[i]
+            for j in range(i + 1, n):
+                sum_probs[i][j] = sum_probs[i][j - 1] + probs[j]
+
+        # Fill dp table for increasing lengths of subarrays
+        for length in range(1, n + 1):  # Length of the subarray
+            for i in range(n - length + 1):
+                j = i + length - 1  # end of the subarray
+                # Initialize dp[i][j] with a large number
+                dp[i][j] = sys.maxsize
+                # Try each node as the root
+                for r in range(i, j + 1):
+                    cost_left = dp[i][r - 1] if r > i else 0
+                    cost_right = dp[r + 1][j] if r < j else 0
+                    total_cost = cost_left + cost_right + sum_probs[i][j]
+                    dp[i][j] = min(dp[i][j], total_cost)
+
+        return round(dp[0][n - 1], 2)
 
 
-# Hardcoded values
-keys = [10, 20, 30, 40, 50]  # Node values (keys)
-p = [0.1, 0.3, 0.2, 0.2, 0.2]  # Probabilities for successful search (p)
-q = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]  # Probabilities for unsuccessful search (q)
-n = len(keys)
+def main():
+    tree_manager = ColorCombinationTreeWithProbabilities()
 
-# Compute the cost and root matrices (Optimal BST computation)
-cost, root = optimal_bst(keys, p, q, n)
+    print("Enter colors and their probabilities (e.g., 'red, 0.4'). Type 'done' to stop.")
+    while True:
+        user_input = input("\nEnter a color and its probability: ").strip()
+        if user_input.lower() == 'done':
+            break
 
-# Reconstruct the tree based on the root matrix
-tree = construct_obst(root, keys, 0, n)
+        try:
+            color, probability = user_input.split(',')
+            tree_manager.add_color(color.strip(), float(probability.strip()))
+        except ValueError:
+            print("Invalid input. Please enter in the format 'color, probability'.")
 
-# Print results for debugging
-print("\nRounded Cost Matrix:")
-for row in cost:
-    print(row)
-    
-print("\nRoot Matrix:")
-for row in root:
-    print(row)
+    print("\nEnter color combinations (e.g., 'red, blue'). Type 'no' to stop.")
+    while True:
+        user_input = input("\nEnter two colors to combine: ").strip()
+        if user_input.lower() == 'no':
+            break
 
-# Visualize the Optimal BST
-plot_tree(tree)
+        colors = [color.strip() for color in user_input.split(',')]
+        if len(colors) != 2:
+            print("Invalid input. Please enter exactly two colors separated by a comma.")
+            continue
 
-# Display the minimum search cost rounded to 2 decimal places
-min_search_cost = cost[0][n]
-rounded_cost = round(min_search_cost, 2)  # Round to 2 decimal places
-print(f"\nMinimum Search Cost: {rounded_cost}")
+        tree_manager.add_combination(colors[0], colors[1])
 
-# Convert the tree to DOT format and save to a file
-dot_string = tree_to_dot(tree)
-save_dot_file(dot_string, "optimal_bst.dot")
-print("\nDOT file 'optimal_bst.dot' has been saved.")
+    visualize_bst = input("\nDo you want to visualize the full optimal binary search tree? (yes/no): ").strip().lower()
+    if visualize_bst == 'yes':
+        optimal_bst = tree_manager.build_optimal_bst()
+        print("\nVisualizing the full optimal BST...")
+        tree_manager.visualize_full_bst(optimal_bst)
+    else:
+        print("\nExiting without visualizing the full optimal BST.")
 
+    probabilities = list(tree_manager.color_probabilities.values())
+    optimal_bst_cost = tree_manager.optimal_bst_probabilities(probabilities)
+    print(f"\nOptimal BST cost: {optimal_bst_cost}")
+
+
+if __name__ == "__main__":
+    main()
