@@ -2,30 +2,31 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import sys
 
+# This is the TreeNode class to represent nodes in a binary tree
 class TreeNode:
     """A node in a binary tree."""
     def __init__(self, value, probability=1.0):
         self.value = value
-        self.probability = probability
-        self.left = None
-        self.right = None
+        self.probability = probability # This stores the probability associated with the node
+        self.left = None # Left child node
+        self.right = None # Right child node
 
+    # This is the method to add the left child to the current node
     def add_left(self, node):
         self.left = node
-
+    
+    # This is the method to add the right child to the current node
     def add_right(self, node):
         self.right = node
 
-
+# This handles the creation of trees and an optimal BST with probabilities
 class ColorCombinationTreeWithProbabilities:
-    # This handles the creation of trees and an optimal BST with probabilities
     def __init__(self):
         self.color_probabilities = {}  # This stores probabilities of individual colors
-        self.combinations = []  # This tores individual color combinations
+        self.combinations = []  # This stores individual color combinations
 
     def add_color(self, color, probability):
-        """Adds a color with its probability."""
-        self.color_probabilities[color] = probability
+        self.color_probabilities[color] = probability # This adds a color with its probability
 
     def add_combination(self, color1, color2):
         # This adds a combination of two colors and generates the resulting color
@@ -46,12 +47,12 @@ class ColorCombinationTreeWithProbabilities:
             # This builds the tree for the combination
             tree = self.build_small_tree(color1, color2, result, probability)
             
-            # This prints and visualizes the tree
+            # This prints and visualizes the tree for the combination
             print(f"\nTree for combination {color1} + {color2} = {result} (Probability: {probability}):")
             self.visualize_tree(tree, f"combination_{color1}_{color2}_{result}")
 
     def combine_colors(self, color1, color2):
-        """Automatically determines the result of combining two colors."""
+        # This automatically determines the result of combining two colors
         color_combinations = {
             ('red', 'blue'): 'purple',
             ('blue', 'yellow'): 'green',
@@ -71,16 +72,18 @@ class ColorCombinationTreeWithProbabilities:
         # If not found in the dictionary, return 'unknown'
         return color_combinations.get((color1, color2), 'unknown')
 
+    # This method builds a binary tree for two colors and their result
     def build_small_tree(self, color1, color2, result, probability):
-        """Builds a binary tree for two colors and their result."""
+        # This creates the root node with the result of the combination and its probability
         root = TreeNode(result, probability)
+        # This adds the color1 and color2 as the left and right children respectively
         root.add_left(TreeNode(color1, self.color_probabilities.get(color1, 1.0)))
         root.add_right(TreeNode(color2, self.color_probabilities.get(color2, 1.0)))
         return root
 
+    # This method builds an optimal binary search tree using the combinations and probabilities
     def build_optimal_bst(self):
-        """Builds an optimal binary search tree using the combinations and probabilities."""
-        # Create a dictionary to store the TreeNode for each color and result
+        # This creates a dictionary to store the TreeNode for each color and result
         node_map = {}
 
         # Helper function to retrieve or create nodes
@@ -89,7 +92,7 @@ class ColorCombinationTreeWithProbabilities:
                 node_map[value] = TreeNode(value, probability)
             return node_map[value]
 
-        # Iterate through all combinations and build the tree
+        # This iterates through all combinations and builds the tree
         for color1, color2, result, probability in self.combinations:
             # Get or create nodes for the result and the two input colors
             result_node = get_node(result, probability)
@@ -123,8 +126,9 @@ class ColorCombinationTreeWithProbabilities:
 
         return traverse(root)
 
+    # This method gets the hex color for a given color name
     def get_color_hex(self, color_name):
-        """Returns the corresponding hex color value for a given color name."""
+        # This returns the corresponding hex color value for a given color name
         color_map = {
             'red': '#FF0000',
             'blue': '#0000FF',
@@ -147,6 +151,7 @@ class ColorCombinationTreeWithProbabilities:
         """Visualizes the tree in a hierarchical format and saves it as a PNG file."""
         G = nx.DiGraph()
 
+        # This function is to add edges and nodes to the graph
         def add_edges(node):
             if node:
                 current_id = str(id(node))
@@ -169,6 +174,7 @@ class ColorCombinationTreeWithProbabilities:
         # Use the hierarchical layout
         pos = self.hierarchical_layout(root)
         labels = nx.get_node_attributes(G, 'label')
+        # This draws the tree using NetworkX that I imported and installed
         nx.draw(
             G,
             pos,
@@ -180,19 +186,18 @@ class ColorCombinationTreeWithProbabilities:
             font_color="white",
         )
 
-        # Save the tree visualization as a PNG file
+        # This saves the tree visualization as a PNG file
         plt.title(f"Tree Visualization for {filename}")
         plt.savefig(f"{filename}_tree.png", format="png")
         plt.close()
 
         print(f"Tree saved as {filename}_tree.png")
-
+    # This visualizes the full optimal binary search tree in a hierarchical format
     def visualize_full_bst(self, root):
-        """Visualizes the full optimal binary search tree in a hierarchical format."""
         self.visualize_tree(root, "full_optimal_bst")
 
+    # This method computes the optimal BST cost using dynamic programming
     def optimal_bst_probabilities(self, probs):
-        """Dynamic programming approach to find optimal BST given probabilities."""
         n = len(probs)
         # dp[i][j] will store the minimum cost of BST from i to j
         dp = [[0] * n for _ in range(n)]
@@ -205,11 +210,11 @@ class ColorCombinationTreeWithProbabilities:
             for j in range(i + 1, n):
                 sum_probs[i][j] = sum_probs[i][j - 1] + probs[j]
 
-        # Fill dp table for increasing lengths of subarrays
+        # This fills the dp table for increasing lengths of subarrays
         for length in range(1, n + 1):  # Length of the subarray
             for i in range(n - length + 1):
                 j = i + length - 1  # end of the subarray
-                # Initialize dp[i][j] with a large number
+                # This initializes dp[i][j] with a large number
                 dp[i][j] = sys.maxsize
                 # Try each node as the root
                 for r in range(i, j + 1):
@@ -218,49 +223,68 @@ class ColorCombinationTreeWithProbabilities:
                     total_cost = cost_left + cost_right + sum_probs[i][j]
                     dp[i][j] = min(dp[i][j], total_cost)
 
-        return round(dp[0][n - 1], 2)
+        return round(dp[0][n - 1], 2) # This returns the rounded minimal cost for the entire range
 
 
 def main():
+    # Step 1: Create an instance for the ColorCombinationTreeWithProbabilities method
     tree_manager = ColorCombinationTreeWithProbabilities()
 
+    # Step 2: Allow the user to input colors and their corresponding probabilities
     print("Enter colors and their probabilities (e.g., 'red, 0.4'). Type 'done' to stop.")
+    
     while True:
+        # This prompts the user to enter the color and its probability
         user_input = input("\nEnter a color and its probability: ").strip()
+        # If the user enters done, the user can stop entering colors
         if user_input.lower() == 'done':
             break
 
         try:
+            # This splits the input by comma to seperate the color from its probability
             color, probability = user_input.split(',')
+            # This adds the color and probability to the tree manager
             tree_manager.add_color(color.strip(), float(probability.strip()))
         except ValueError:
             print("Invalid input. Please enter in the format 'color, probability'.")
 
+    # Step 3: Allow the user to input color combinations to generate new colors
     print("\nEnter color combinations (e.g., 'red, blue'). Type 'no' to stop.")
+    
     while True:
+        # This prompts the user for color combinations
         user_input = input("\nEnter two colors to combine: ").strip()
+        # If the user enters no, the user can stop entering combinations
         if user_input.lower() == 'no':
             break
-
         colors = [color.strip() for color in user_input.split(',')]
         if len(colors) != 2:
             print("Invalid input. Please enter exactly two colors separated by a comma.")
             continue
-
+        # This adds the color combination to the tree manager
         tree_manager.add_combination(colors[0], colors[1])
 
+    # Step 4: Ask user if they want to visualize the full optimal BST
     visualize_bst = input("\nDo you want to visualize the full optimal binary search tree? (yes/no): ").strip().lower()
+    
     if visualize_bst == 'yes':
+        # If the user wants to visualize the tree, build and display it
         optimal_bst = tree_manager.build_optimal_bst()
         print("\nVisualizing the full optimal BST...")
         tree_manager.visualize_full_bst(optimal_bst)
     else:
+        # If not, this will be printed
         print("\nExiting without visualizing the full optimal BST.")
 
+    # Step 5: Get the list of color probabilities from the tree manager
     probabilities = list(tree_manager.color_probabilities.values())
+    
+    # Step 6: Calculate the optimal BST cost using dynamic programming
     optimal_bst_cost = tree_manager.optimal_bst_probabilities(probabilities)
+    
+    # Step 7: Output the optimal BST cost to the user
     print(f"\nOptimal BST cost: {optimal_bst_cost}")
 
-
+# This makes sure the main function runs when the script is entered
 if __name__ == "__main__":
     main()
