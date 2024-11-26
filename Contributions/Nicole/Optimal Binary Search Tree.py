@@ -5,7 +5,7 @@ import sys
 # This is the TreeNode class to represent nodes in a binary tree
 class TreeNode:
     """A node in a binary tree."""
-    def __init__(self, value, probability=1.0):
+    def __init__(self, value, probability = 1.0):
         self.value = value
         self.probability = probability # This stores the probability associated with the node
         self.left = None # Left child node
@@ -87,7 +87,7 @@ class ColorCombinationTreeWithProbabilities:
         node_map = {}
 
         # Helper function to retrieve or create nodes
-        def get_node(value, probability=1.0):
+        def get_node(value, probability = 1.0):
             if value not in node_map:
                 node_map[value] = TreeNode(value, probability)
             return node_map[value]
@@ -114,7 +114,7 @@ class ColorCombinationTreeWithProbabilities:
 
     def hierarchical_layout(self, root):
         """Creates a custom hierarchical layout for a tree."""
-        def traverse(node, x=0, depth=0, pos=None, width=1):
+        def traverse(node, x = 0, depth = 0, pos = None, width = 1):
             if not pos:
                 pos = {}
             if node:
@@ -157,7 +157,7 @@ class ColorCombinationTreeWithProbabilities:
                 current_id = str(id(node))
                 label = f"{node.value}\nP={node.probability:.2f}"
                 color = self.get_color_hex(node.value)  # Get the color for the node
-                G.add_node(current_id, label=label, color=color)
+                G.add_node(current_id, label = label, color = color)
                 if node.left:
                     G.add_edge(current_id, str(id(node.left)))
                     add_edges(node.left)
@@ -178,17 +178,17 @@ class ColorCombinationTreeWithProbabilities:
         nx.draw(
             G,
             pos,
-            with_labels=True,
-            labels=labels,
-            node_color=node_colors,
-            font_size=10,
-            node_size=3000,
-            font_color="white",
+            with_labels = True,
+            labels = labels,
+            node_color = node_colors,
+            font_size = 10,
+            node_size = 3000,
+            font_color = "black",
         )
 
         # This saves the tree visualization as a PNG file
         plt.title(f"Tree Visualization for {filename}")
-        plt.savefig(f"{filename}_tree.png", format="png")
+        plt.savefig(f"{filename}_tree.png", format = "png")
         plt.close()
 
         print(f"Tree saved as {filename}_tree.png")
