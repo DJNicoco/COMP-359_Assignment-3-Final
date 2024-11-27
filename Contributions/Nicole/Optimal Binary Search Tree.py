@@ -197,12 +197,13 @@ class ColorCombinationTreeWithProbabilities:
         self.visualize_tree(root, "full_optimal_bst")
 
     # This method computes the optimal BST cost using dynamic programming
-    def optimal_bst_probabilities(self, probs):
+    def optimal_bst_probabilities_with_root_table(self, probs):
         n = len(probs)
         # dp[i][j] will store the minimum cost of BST from i to j
         dp = [[0] * n for _ in range(n)]
         # sum_probs[i][j] will store the sum of probabilities from i to j
         sum_probs = [[0] * n for _ in range(n)]
+        root = [[-1] * n for _ in range(n)]
 
         # Calculate the sum of probabilities for ranges [i, j]
         for i in range(n):
@@ -221,9 +222,17 @@ class ColorCombinationTreeWithProbabilities:
                     cost_left = dp[i][r - 1] if r > i else 0
                     cost_right = dp[r + 1][j] if r < j else 0
                     total_cost = cost_left + cost_right + sum_probs[i][j]
-                    dp[i][j] = min(dp[i][j], total_cost)
-
-        return round(dp[0][n - 1], 2) # This returns the rounded minimal cost for the entire range
+                    if total_cost < dp[i][j]:
+                        dp[i][j] = total_cost
+                        root[i][j] = r
+                        
+                
+        # Print the root table
+        print("\nRoot Table:")
+        for row in root:
+            print(row)
+                
+        return round(dp[0][n - 1], 2), root # This returns the rounded minimal cost for the entire range
 
 
 def main():
@@ -279,11 +288,12 @@ def main():
     # Step 5: Get the list of color probabilities from the tree manager
     probabilities = list(tree_manager.color_probabilities.values())
     
-    # Step 6: Calculate the optimal BST cost using dynamic programming
-    optimal_bst_cost = tree_manager.optimal_bst_probabilities(probabilities)
-    
-    # Step 7: Output the optimal BST cost to the user
+    # Step 6: Calculate the optimal BST cost and root table using dynamic programming
+    optimal_bst_cost, root_table = tree_manager.optimal_bst_probabilities_with_root_table(probabilities)
+
+    # Step 7: Output the optimal BST cost and root table
     print(f"\nOptimal BST cost: {optimal_bst_cost}")
+    # Step 8: Display the root table
 
 # This makes sure the main function runs when the script is entered
 if __name__ == "__main__":
