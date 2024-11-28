@@ -66,8 +66,6 @@ The **FamilyTree** class gives functionality to:
 - Add children to a specific parent.
 - Allows to create a visualization of the Family Tree using ASCII art for a more understandable representation of the familial heirarchy.
 
-#### Implementation 
-
 
 ## Results
 
