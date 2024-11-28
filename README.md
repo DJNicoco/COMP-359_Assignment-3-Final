@@ -50,7 +50,7 @@ In the **ColorCombinationTreeWithProbabilities** class, it handles the overall p
 #### Karan's Implementation (C++) <br>
 My part's implemenation demonstrates how to visualize a BST in the form of a family tree in C++ using a hierarchical structure. The family tree is implemented with a customer **FamilyTree** class and a **Person** struct - which further provides methods for adding family members and visualizing their respective relationhips. I decided to use the ASCII visualization approach to show how this type of BST would work. I also found that this simplifies the process a bit so it is easier to understand family relationships. 
 
-## sdfkjh.ads <br>
+### sdfkjh.ads <br>
 
 ## Results
 
