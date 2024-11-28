@@ -24,7 +24,7 @@ Optimal BST function pseudocode from Levitin (2012): <br>
 In this assignment, we each focused on implementing different kinds of optimal binary search trees in different programming languages: Python, Java, and C++. <br>
 
 Below is a breakdown of each member's role and the key concepts of their implementation: 
-#### Nicole's Implementation (Python) <br>
+### Nicole's Implementation (Python) <br>
 For my part, I implemented a Python program that constructs an optimal BST for a set of colors, each with a corresponding probability. <br>
 The program allows users to:
 1. Input colors and their corresponding probabilities 
@@ -45,16 +45,33 @@ In the **ColorCombinationTreeWithProbabilities** class, it handles the overall p
 **Tree Visualization:** After all combinations are added, the user can choose to visualize the full optimal BST. If selected, the tree is built and displayed using a hierarchical layout with matplotlib and networkx. The nodes are color-coded based on the combinations, showing the tree structure clearly. <br>
 **Dynamic Programming for Optimal BST Cost:** After building the tree, dynamic programming is used to compute the optimal BST’s cost, minimizing the search cost based on the probabilities of each node. this is done using a matrix-based approach where each entry in the matrix represents the minimum search cost for a subtree of the BST. The algorithm computes the optimal BST by filling out this matrix based on the probabilities of each color combination. <br>
 
-#### Navraj's Implementation (Java) <br>
+### Navraj's Implementation (Java) <br>
 
-#### Karan's Implementation (C++) <br>
-My part's implemenation demonstrates how to visualize a BST in the form of a family tree in C++ using a hierarchical structure. The family tree is implemented with a customer **FamilyTree** class and a **Person** struct - which further provides methods for adding family members and visualizing their respective relationhips. I decided to use the ASCII visualization approach to show how this type of BST would work. I also found that this simplifies the process a bit so it is easier to understand family relationships. 
+### Karan's Implementation (C++) <br>
 
-### sdfkjh.ads <br>
+My part's implemenation demonstrates how to visualize a BST in the form of a family tree in C++ using a hierarchical structure. The family tree is implemented with a custom **FamilyTree** class and a **Person** struct - which further provides methods for adding family members and visualizing their respective relationhips. I decided to use the ASCII visualization approach to show how this type of BST would work. I also found that this simplifies the process a bit so it is easier to understand family relationships. 
+
+#### Key Components of CPP Program: <br>
+
+#### 1. Person Struct
+The **Person** struct represents an individual in the family tree. 
+Each person contains: 
+- **Name**: The name of the individual
+- **leftChild**: A pointer to the first child of the person.
+- **rightSibling**: A pointer to the person's next sibling.
+
+#### 2. FamilyTree Class
+The **FamilyTree** class gives functionality to: 
+- Initialize a family tree with a root person. My tree goes as far as grandparent - so the root is the grandparent.
+- Add children to a specific parent.
+- Allows to create a visualization of the Family Tree using ASCII art for a more understandable representation of the familial heirarchy.
+
+#### Implementation 
+
 
 ## Results
 
-#### Nicole's Results (Python) <br>
+### Nicole's Results (Python) <br>
 #### Output:
 Here is the optimal BST’s structure generated from the input data: <br>
 ![image](https://github.com/user-attachments/assets/24e81e2a-ca9d-4e46-a206-d3fead8fb0b7)
@@ -70,9 +87,9 @@ These are the input values used in the algorithm to calculate the optimal BST: <
 This is the visualized optimal BST, showing how the colors combine with their probabilities: <br>
 ![image](https://github.com/user-attachments/assets/6ac2ebf6-67d2-4bb4-8164-4b7033550d4f)
 
-#### Navraj's Results (Python) <br>
+### Navraj's Results (Python) <br>
 
-#### Karan's Results (C++) <br>
+### Karan's Results (C++) <br>
 
 ## References
 
