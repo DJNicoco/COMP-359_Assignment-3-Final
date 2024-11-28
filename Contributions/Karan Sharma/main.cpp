@@ -3,19 +3,21 @@
 using namespace std;
 
 // Recursive function to add children interactively
-void addChildrenInteractively(FamilyTree& tree, Person* parent) {
+void dynamicInteractiveChildrenAddition(FamilyTree& tree, Person* parent) {
     int numChildren;
 
     // Explicitly state whose children are being entered
     cout << "\nHow many children does " << parent->name << " have? ";
     cin >> numChildren;
+    cout << endl;
 
     for (int i = 0; i < numChildren; ++i) {
         string childName;
 
-        // Prompt for each child’s name
+        // Prompt for each childâ€™s name
         cout << "Enter the name of child " << i + 1 << " of " << parent->name << ": ";
         cin >> childName;
+        cout << endl;
 
         // Add the child to the parent
         tree.addChild(parent, childName);
@@ -30,9 +32,10 @@ void addChildrenInteractively(FamilyTree& tree, Person* parent) {
         char addGrandchildren;
         cout << "Does " << childName << " have children? (y/n): ";
         cin >> addGrandchildren;
+        cout << endl;
 
         if (addGrandchildren == 'y' || addGrandchildren == 'Y') {
-            addChildrenInteractively(tree, newChild); // Recursive call for grandchildren
+            dynamicInteractiveChildrenAddition(tree, newChild); // Recursive call for grandchildren
         }
     }
 }
@@ -46,7 +49,7 @@ int main() {
     FamilyTree family(grandparentName);
 
     // Add children to the grandparent interactively
-    addChildrenInteractively(family, family.root);
+    dynamicInteractiveChildrenAddition(family, family.root);
 
     // Display the entire family tree
     cout << "\nFamily Tree Visualization:\n";

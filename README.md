@@ -44,7 +44,9 @@ Key methods in this class include:
 - the add_combination method combines two colors, calculates their resulting color and probability, and constructs the tree node.
 - the build_optimal_bst method compiles the full binary search tree from all combinations
 - the optimal_bst_probabilities_with_root_table method uses dynamic programming to calculate the optimal BST cost, minimizing the search cost based on probabilities.
-- the visualize_tree method provides a visual representation of the tree using matplotlib and networkx, offering a clear view of the tree structure. Together, these methods ensure the program builds and visualizes the optimal binary search tree while calculating its minimal search cost.
+- the visualize_tree method provides a visual representation of the tree using matplotlib and networkx, offering a clear view of the tree structure. <br>
+
+Together, these methods ensure the program builds and visualizes the optimal binary search tree while calculating its minimal search cost.
 
 **The Main Function Flow** <br>
 
