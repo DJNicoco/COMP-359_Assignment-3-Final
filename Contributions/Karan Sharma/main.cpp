@@ -1,29 +1,55 @@
 #include "FamilyTree.h"
+#include <iostream>
+using namespace std;
+
+// Recursive function to add children interactively
+void addChildrenInteractively(FamilyTree& tree, Person* parent) {
+    int numChildren;
+
+    // Explicitly state whose children are being entered
+    cout << "\nHow many children does " << parent->name << " have? ";
+    cin >> numChildren;
+
+    for (int i = 0; i < numChildren; ++i) {
+        string childName;
+
+        // Prompt for each child’s name
+        cout << "Enter the name of child " << i + 1 << " of " << parent->name << ": ";
+        cin >> childName;
+
+        // Add the child to the parent
+        tree.addChild(parent, childName);
+
+        // Find the newly added child in the parent's children list
+        Person* newChild = parent->leftChild;
+        while (newChild->rightSibling != nullptr) {
+            newChild = newChild->rightSibling; // Traverse to the last sibling (newly added child)
+        }
+
+        // Check if the newly added child has their own children
+        char addGrandchildren;
+        cout << "Does " << childName << " have children? (y/n): ";
+        cin >> addGrandchildren;
+
+        if (addGrandchildren == 'y' || addGrandchildren == 'Y') {
+            addChildrenInteractively(tree, newChild); // Recursive call for grandchildren
+        }
+    }
+}
 
 int main() {
-    // Create a family tree with a root person
-    FamilyTree family("Billy The 3rd (Grandpa)");
+    // Start the family tree
+    string grandparentName;
+    cout << "Enter the name of the grandparent: ";
+    cin >> grandparentName;
 
-    // Add children to the root
-    family.addChild(family.root, "Pablo (child 1)");
-    family.addChild(family.root, "Sofia (child 2)");
+    FamilyTree family(grandparentName);
 
-    // Add grandchildren to Parent1
-    family.addChild(family.root->leftChild, "Cono");
-    family.addChild(family.root->leftChild, "Jono");
-    family.addChild(family.root->leftChild, "Meowdy");
+    // Add children to the grandparent interactively
+    addChildrenInteractively(family, family.root);
 
-    // Add grandchildren to Parent2
-    family.addChild(family.root->leftChild->rightSibling, "Pomo");
-    family.addChild(family.root->leftChild->rightSibling, "Poco");
-    family.addChild(family.root->leftChild->rightSibling, "Polo");
-
-
-    // Display the family tree
-    cout << "Family Tree:\n";
-    family.printTree(family.root);
-
-    cout << "Family Tree Visualization:\n";
+    // Display the entire family tree
+    cout << "\nFamily Tree Visualization:\n";
     family.visualizeTree(family.root);
 
     return 0;
