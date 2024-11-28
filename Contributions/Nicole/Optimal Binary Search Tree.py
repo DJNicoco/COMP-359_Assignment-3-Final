@@ -225,15 +225,8 @@ class ColorCombinationTreeWithProbabilities:
                     if total_cost < dp[i][j]:
                         dp[i][j] = total_cost
                         root[i][j] = r
-                        
-                
-        # Print the root table
-        print("\nRoot Table:")
-        for row in root:
-            print(row)
-                
-        return round(dp[0][n - 1], 2), root # This returns the rounded minimal cost for the entire range
 
+        return round(dp[0][n - 1], 2), root # This returns the rounded minimal cost for the entire range
 
 def main():
     # Step 1: Create an instance for the ColorCombinationTreeWithProbabilities method
@@ -293,7 +286,11 @@ def main():
 
     # Step 7: Output the optimal BST cost and root table
     print(f"\nOptimal BST cost: {optimal_bst_cost}")
-    # Step 8: Display the root table
+   
+    # Print the root table
+    print("\nRoot Table:")
+    for row in root_table:
+        print(row)
 
 # This makes sure the main function runs when the script is entered
 if __name__ == "__main__":
