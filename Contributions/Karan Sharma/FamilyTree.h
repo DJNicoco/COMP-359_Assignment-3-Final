@@ -17,6 +17,9 @@ public:
 
     // Print the family tree (DFS-style)
     void printTree(Person* node, string prefix = "");
+
+    // Visualize the tree using an ASCII representation
+    void visualizeTree(Person* node, int depth = 0);
 };
 
 #endif

@@ -23,5 +23,8 @@ int main() {
     cout << "Family Tree:\n";
     family.printTree(family.root);
 
+    cout << "Family Tree Visualization:\n";
+    family.visualizeTree(family.root);
+
     return 0;
 }

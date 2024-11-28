@@ -1,4 +1,5 @@
 #include "FamilyTree.h"
+#include <iomanip>
 
 // Constructor
 FamilyTree::FamilyTree(string rootName) {
@@ -31,4 +32,20 @@ void FamilyTree::printTree(Person* node, string prefix) {
 
     // Print siblings
     printTree(node->rightSibling, prefix);
+}
+// Visualize the tree using an ASCII representation
+void FamilyTree::visualizeTree(Person* node, int depth) {
+    if (node == nullptr)
+        return;
+
+    // Indent based on depth
+    cout << string(depth * 4, ' ') << "|-- " << node->name << endl;
+
+    // Visualize the children and siblings
+    if (node->leftChild) {
+        visualizeTree(node->leftChild, depth + 1);  // Recurse for children
+    }
+    if (node->rightSibling) {
+        visualizeTree(node->rightSibling, depth);  // Recurse for siblings
+    }
 }
