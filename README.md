@@ -121,6 +121,10 @@ This is the visualized optimal BST, showing how the colors combine with their pr
 ![image](https://github.com/user-attachments/assets/6ac2ebf6-67d2-4bb4-8164-4b7033550d4f)
 
 ### Navraj's Results (Python) <br>
+#### Output: 
+Here is the output generated from the user inputs along with ascii visualization: <br>
+![obst](https://github.com/user-attachments/assets/175e4017-170b-426d-a76e-0b623c1b7d62)
+
 
 ### Karan's Results (C++) <br>
 #### Output: 
