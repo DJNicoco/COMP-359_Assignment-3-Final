@@ -97,11 +97,19 @@ This is the visualized optimal BST, showing how the colors combine with their pr
 ### Navraj's Results (Python) <br>
 
 ### Karan's Results (C++) <br>
+#### Output: 
+![image](https://github.com/user-attachments/assets/ee8539fa-468b-4b7f-8d91-2b68a428971e)
 
 ## References
 
 Campbell, R. (2024). "Ch 8: Dynamic Programming." Week 10 Slides. <br>
 “Optimal Binary Search Tree: DP-24.” GeeksforGeeks, 10 July 2023, www.geeksforgeeks.org/optimal-binary-search-tree-dp-24/ <br>
+
+3. https://www.geeksforgeeks.org/cpp-binary-search-tree/
+4. https://www.w3schools.com/cpp/cpp_oop.asp
+5. https://www.youtube.com/watch?v=w4gNct0QQIY
+6. https://cplusplus.com/forum/general/58945/
+
 
 
 
