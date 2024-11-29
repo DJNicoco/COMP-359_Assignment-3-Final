@@ -53,10 +53,20 @@ public class DecisionOBST {
     }
 
     // Sum probabilities in the range
-    private static double SumOfProbabilities(double[] p, double[] q, int i, int j) {
+   private static double SumOfProbabilities(double[] p, double[] q, int i, int j) {
         double sum = 0;
-        for (int k = i; k <= j; k++) sum += p[k];
-        for (int k = i - 1; k <= j; k++) sum += q[k];
+        // Sum probabilities in the range of p
+        for (int k = i - 1; k < j; k++) { // Adjust index range for p
+            if (k >= 0 && k < p.length) {
+                sum += p[k];
+            }
+        }
+        // Sum probabilities in the range of q
+        for (int k = i - 1; k <= j; k++) { // Adjust index range for q
+            if (k >= 0 && k < q.length) {
+                sum += q[k];
+            }
+        }
         return sum;
     }
 
