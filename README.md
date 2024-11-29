@@ -75,6 +75,7 @@ The **FamilyTree** class gives functionality to:
 - Initialize a family tree with a root person. My tree goes as far as grandparent - so the root is the grandparent.
 - Add children to a specific parent.
 - Allows to create a visualization of the Family Tree using ASCII art for a more understandable representation of the familial heirarchy.
+- Using BST in-order search to find a person within the family tree. 
 
 ## Results
 
