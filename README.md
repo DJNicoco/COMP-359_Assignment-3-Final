@@ -98,17 +98,26 @@ This is the visualized optimal BST, showing how the colors combine with their pr
 
 ### Karan's Results (C++) <br>
 #### Output: 
+Here is a visualization of how the tree looks with some ASCII art: <br>
+![image](https://github.com/user-attachments/assets/88fe1517-3ffb-4271-a3da-2f10fdfbb3de)
+
+Below is an output where the user creates a family tree and then uses that to search for a specific family member. 
+In the below output, family member exists in the tree: <br>
 ![image](https://github.com/user-attachments/assets/ee8539fa-468b-4b7f-8d91-2b68a428971e)
+
+Below is another output where the target person is **not** part of the family tree: <br>
+![image](https://github.com/user-attachments/assets/a42b4992-c3ec-4a9a-b8e2-1e22e7ecb5c4)
+
+
 
 ## References
 
-Campbell, R. (2024). "Ch 8: Dynamic Programming." Week 10 Slides. <br>
-“Optimal Binary Search Tree: DP-24.” GeeksforGeeks, 10 July 2023, www.geeksforgeeks.org/optimal-binary-search-tree-dp-24/ <br>
-
-3. https://www.geeksforgeeks.org/cpp-binary-search-tree/
-4. https://www.w3schools.com/cpp/cpp_oop.asp
-5. https://www.youtube.com/watch?v=w4gNct0QQIY
-6. https://cplusplus.com/forum/general/58945/
+1. Campbell, R. (2024). "Ch 8: Dynamic Programming." Week 10 Slides. <br>
+2. “Optimal Binary Search Tree: DP-24.” GeeksforGeeks, 10 July 2023, www.geeksforgeeks.org/optimal-binary-search-tree-dp-24/ <br>
+3. GeeksforGeeks. (2023, May 15). Binary Search Tree in C++. GeeksforGeeks. https://www.geeksforgeeks.org/cpp-binary-search-tree/<br>
+4. W3Schools. (n.d.). C++ OOP (Object-Oriented Programming). W3Schools. Retrieved November 28, 2024, from https://www.w3schools.com/cpp/cpp_oop.asp
+5. Cave of Programming. (2024, November 28). Linking and Header Files | C++ For Java Devs Ep. 3 [Video]. YouTube. https://www.youtube.com/watch?v=w4gNct0QQIY
+6. Enzo Ti. (2012, January 8). How to print ascii art in c++? Cplusplus.com. https://cplusplus.com/forum/general/58945/
 
 
 
