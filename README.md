@@ -139,20 +139,12 @@ Below is another output where the target person is **not** part of the family tr
 ![image](https://github.com/user-attachments/assets/a42b4992-c3ec-4a9a-b8e2-1e22e7ecb5c4)
 
 
-
 ## References
 
-1. Campbell, R. (2024). "Ch 8: Dynamic Programming." Week 10 Slides. 
-2. GeeksforGeeks. (2023, July 10) Optimal Binary Search Tree: DP-24. GeeksforGeeks. www.geeksforgeeks.org/optimal-binary-search-tree-dp-24/
-3. GeeksforGeeks. (2024, April 8). Binary Search Tree In Python. GeeksforGeeks. https://www.geeksforgeeks.org/binary-search-tree-in-python/
+1. Campbell, R. (2024). "Ch 8: Dynamic Programming." Week 10 Slides.
+2. Cave of Programming. (2021, March 27). Linking and Header Files | C++ For Java Devs Ep. 3 [Video]. YouTube. https://www.youtube.com/watch?v=w4gNct0QQIY
+3. Enzo Ti. (2012, January 8). How to print ascii art in c++? Cplusplus.com. https://cplusplus.com/forum/general/58945/
 4. GeeksforGeeks. (2023, May 15). Binary Search Tree in C++. GeeksforGeeks. https://www.geeksforgeeks.org/cpp-binary-search-tree/
-5. W3Schools. (n.d.). C++ OOP (Object-Oriented Programming). W3Schools. https://www.w3schools.com/cpp/cpp_oop.asp
-6. Cave of Programming. (2021, Mar 27). Linking and Header Files | C++ For Java Devs Ep. 3 [Video]. YouTube. https://www.youtube.com/watch?v=w4gNct0QQIY
-7. Enzo Ti. (2012, January 8). How to print ascii art in c++? Cplusplus.com. https://cplusplus.com/forum/general/58945/
-
-
-
-
-
-
-
+5. GeeksforGeeks. (2024, April 8). Binary Search Tree In Python. GeeksforGeeks. https://www.geeksforgeeks.org/binary-search-tree-in-python/
+6. GeeksforGeeks. (2023, July 10). Optimal Binary Search Tree: DP-24. GeeksforGeeks. www.geeksforgeeks.org/optimal-binary-search-tree-dp-24/
+7. W3Schools. (n.d.). C++ OOP (Object-Oriented Programming). W3Schools. https://www.w3schools.com/cpp/cpp_oop.asp
