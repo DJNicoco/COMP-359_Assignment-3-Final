@@ -2,8 +2,8 @@ import java.util.Scanner;
 public class DecisionOBST {
     // Node class to represent each question/decision
     static class Node {
-        String question;
-        Node left, right;
+        String question; // The question or decision point
+        Node left, right; // Pointers to left and right child nodes
 
         public Node(String question) {
             this.question = question;
@@ -15,7 +15,9 @@ public class DecisionOBST {
     // Build the OBST using dynamic programming
     public static Node OBST(String[] keys, double[] p, double[] q) {
         int n = keys.length;
+        // Table to store the minimum costs for subtrees
         double[][] cost = new double[n + 2][n + 2];
+        // Table to store the optimal root for each subtree
         int[][] root = new int[n + 1][n + 1];
 
         // Initialize cost
