@@ -4,20 +4,25 @@ Link to Github Repo: https://github.com/DJNicoco/COMP-359_Assignment-3-Final.git
 
 Our topic: Optimal shaped BSTs
 
+**Objectve:** This assignment involves implementing the dynamic programming approach to construct an optimal BST for a set of different inputs with probabilities. <br>
+
 ## Contributions:
 
-We all contributed to this README. <br>
-**Nicole** - Wrote the python code <br>
-**Navraj** - Wrote the Java code <br>
-**Karan Sharma** - Wrote the C++ code <br>
+**Nicole:** Wrote the python code <br>
+**Navraj:** Wrote the Java code <br>
+**Karan Sharma:** Wrote the C++ code <br>
+**All Members:** Contributed to this README.
 
 ## Introduction into Optimal Binary Search Trees
 
-Optimal Binary Search Trees (BSTs) are a type of binary tree that minimize the expected cost of searching. This assignment involves implementing the dynamic programming approach to construct an optimal BST for a set of different inputs with given search probabilities. 
+Optimal Binary Search Trees (OBSTs) are a form of binary search trees designed to minimize the expected search cost for a set of keys with given probabilities. 
 
-Optimal BST function pseudocode from Levitin (2012): <br>
+**Optimal BST function pseudocode from Levitin (2012)** <br>
+Below is the pseudocode for the OBST algorithm, which uses a dynamic programming approach:
 
 ![image](https://github.com/user-attachments/assets/1b314b6f-9dd1-4da2-8924-3e2abd9d28dd)
+
+This algorithm outlines a dynamic programming approach to construct an optimal binary search tree. The input takes an array of probabilities for successful searches on n keys, ensuring the keys are sorted. For each subtree of increasing size, the algorithm computes the cost of the optimal tree and returns the minimum average cost of the OBST and the table of roots for the optimal subtrees.
 
 ## Analysis Framework
 
@@ -31,7 +36,7 @@ The program allows users to:
 1. Input colors and their corresponding probabilities 
 2. Combine two colors to generate new colors along with their probabilities.
 3. Build a binary tree to represent the color combinations.
-4. Calculate the cost of an Optimal Binary Search Tree using dynamic programming.
+4. Calculate the minimal search cost using dynamic programming.
 5. Visualize the resulting tree structure using matplotlib and networkx.
 
 To implement this, I developed two classes: **TreeNode** and **ColorCombinationTreeWithProbabilities** and each class has different methods. <br>
