@@ -62,6 +62,26 @@ Together, these methods ensure the program builds and visualizes the optimal bin
 
 ### Navraj's Implementation (Java) <br>
 
+My implementation demonstrates how to create a Decision-Making Game in Java using an Optimal Binary Search Tree (OBST). The OBST is built dynamically with probabilities to optimize decision-making paths. The program uses a custom Node class to represent decision points (questions) and their relationships within the tree structure. ASCII-based visualization were used to make the tree structure clear and intuitive, showing how decisions and outcomes are connected hierarchically. This approach not only makes the OBST concept easier to understand but also provides an interactive way to explore decision-making paths.
+#### Key methods used: <br>
+
+##### OBST:
+This method constructs the Optimal Binary Search Tree using dynamic programming. It calculates the minimum cost for each subtree and determines the optimal root for every range of keys.
+
+##### buildTree:
+Recursively constructs the OBST from the optimal roots computed in OBST. It returns the root node of the tree, which serves as the starting point for decisions.
+
+##### SumOfProbabilities:
+Calculates the sum of probabilities (p for keys and q for failure cases) for a given range. This sum is used to compute the expected cost during tree construction.
+
+##### decision:
+Implements the interactive logic. Starting at the root of the tree, users answer questions and traverse the tree based on their choices (left or right). The game ends when no further nodes are available.
+
+##### printTree:
+Visualizes the OBST as an ASCII diagram. Each level of the tree is displayed hierarchically, making it easy to understand parent-child relationships.
+
+
+
 ### Karan's Implementation (C++) <br>
 
 My part's implemenation demonstrates how to visualize a BST in the form of a family tree in C++ using a hierarchical structure. The family tree is implemented with a custom **FamilyTree** class and a **Person** struct - which further provides methods for adding family members and visualizing their respective relationhips. I decided to use the ASCII visualization approach to show how this type of BST would work. I also found that this simplifies the process a bit so it is easier to understand family relationships. 
