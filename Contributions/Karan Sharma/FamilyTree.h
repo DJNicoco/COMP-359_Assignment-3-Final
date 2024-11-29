@@ -1,10 +1,12 @@
 #ifndef FAMILYTREE_H
 #define FAMILYTREE_H
-
 #include "Person.h"
 #include <iostream>
 using namespace std;
 
+/*created a header for the FamilyTree class as well.Same reason as person.h, wanted a refresher on how
+* header files worked and how to link them. 
+*/
 class FamilyTree {
 public:
     Person* root;
@@ -12,14 +14,17 @@ public:
     // Constructor
     FamilyTree(string rootName);
 
-    // Add a child to a parent
+    // in other words setChild - mutator function 
     void addChild(Person* parent, string childName);
 
-    // Print the family tree (DFS-style)
+    // print function 
     void printTree(Person* node, string prefix = "");
 
-    // Visualize the tree using an ASCII representation
+    // visualization function 
     void visualizeTree(Person* node, int depth = 0);
-};
 
+    //search function 
+    Person* search(Person* node, const string& name);
+
+};
 #endif

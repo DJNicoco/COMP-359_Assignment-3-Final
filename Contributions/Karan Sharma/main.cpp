@@ -1,6 +1,8 @@
 #include "FamilyTree.h"
 #include <iostream>
 using namespace std;
+//I used OOP in CPP for this. To get a refresher, I referred to: https://www.w3schools.com/cpp/cpp_oop.asp
+//For BST: https://www.geeksforgeeks.org/cpp-binary-search-tree/
 
 // Recursive function to add children interactively
 void dynamicInteractiveChildrenAddition(FamilyTree& tree, Person* parent) {
@@ -14,7 +16,7 @@ void dynamicInteractiveChildrenAddition(FamilyTree& tree, Person* parent) {
     for (int i = 0; i < numChildren; ++i) {
         string childName;
 
-        // Prompt for each childâ€™s name
+        // Prompt for each child’s name
         cout << "Enter the name of child " << i + 1 << " of " << parent->name << ": ";
         cin >> childName;
         cout << endl;
@@ -51,9 +53,30 @@ int main() {
     // Add children to the grandparent interactively
     dynamicInteractiveChildrenAddition(family, family.root);
 
+    char search; 
+    cout << "Would you like to search for a person in the tree? (y/n): ";
+    cin >> search; 
+    cout << endl; 
+
+    if (search == 'y' || search == 'Y')
+    {
+        // Search for a person
+        string targetName;
+        cout << "\nEnter the name of the person to search for: ";
+        cin >> targetName;
+
+        Person* foundPerson = family.search(family.root, targetName);
+        if (foundPerson)
+            cout << foundPerson->name << " is a part of this family tree." << endl;
+        else
+            cout << "\nThis person is not part of the familyTree.\n";
+    }
+    
     // Display the entire family tree
     cout << "\nFamily Tree Visualization:\n";
     family.visualizeTree(family.root);
+
+   
 
     return 0;
 }
