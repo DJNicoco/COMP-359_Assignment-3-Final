@@ -28,7 +28,7 @@ This algorithm outlines a dynamic programming approach to construct an optimal b
 
 In this assignment, we each focused on implementing different kinds of optimal binary search trees in different programming languages: Python, Java, and C++. <br>
 
-Below is a breakdown of each member's role and the key concepts of their implementation: 
+Below is a breakdown of our roles and the key concepts in our implementations: 
 
 ### Nicole's Implementation (Python) <br>
 For my part, I implemented a Python program that constructs an optimal BST for a set of colors, each with a corresponding probability. <br>
