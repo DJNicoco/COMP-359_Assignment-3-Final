@@ -88,18 +88,20 @@ void FamilyTree::visualizeTree(Person* node, int depth)
 // Search for a person by name in the tree
 Person* FamilyTree::search(Person* node, const string& name) 
 {
+    // base case: node/target person doesn't exist in the family tree
     if (node == nullptr) 
-        return nullptr; // Base case: Node doesn't exist
+        return nullptr; 
 
+    //ding ding ding, we found 'em!
     if (node->name == name) 
-        return node; // Found the person
+        return node; 
 
-    // Search in the left subtree (children)
+    // searches in the left subtree (children)
     Person* foundInChild = search(node->leftChild, name);
     if (foundInChild != nullptr)
         return foundInChild; // Found in children
 
-    // Search in the right subtree (siblings)
+    // searches in the right subtree (siblings)
     return search(node->rightSibling, name);
 }
 
