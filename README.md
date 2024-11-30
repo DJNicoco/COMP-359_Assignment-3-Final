@@ -88,19 +88,29 @@ My part's implemenation demonstrates how to visualize a BST in the form of a fam
 
 #### Key Components of CPP Program: <br>
 
-#### 1. Person Struct
+#### 1. Person Struct (this struct is defined in Person.h)
 The **Person** struct represents an individual in the family tree. 
 Each person contains: 
 - **Name**: The name of the individual
 - **leftChild**: A pointer to the first child of the person.
 - **rightSibling**: A pointer to the person's next sibling.
 
-#### 2. FamilyTree Class
+#### 2. FamilyTree Class (FamilyTree.h declares this class and its methods)
 The **FamilyTree** class gives functionality to: 
-- Initialize a family tree with a root person. My tree goes as far as grandparent - so the root is the grandparent.
+- Initialize a family tree with a root person. The root person can be a grandparent, great-grandparent, great-great-parent, great<sup>n</sup> grandparent etc (however far you'd like to go).
 - Add children to a specific parent.
 - Allows to create a visualization of the Family Tree using ASCII art for a more understandable representation of the familial heirarchy.
-- Using BST in-order search to find a person within the family tree. 
+- Using BST in-order search to find a person within the family tree.
+
+#### 3. FamilyTree.cpp file
+- This file consists of the implementation of the FamilyTree class methods which include:
+      - Adding children
+      - Searching for individuals within the tree.
+      - Visualizing the family tree.
+   
+#### 4. Main.cpp file
+- This file contains the main function which allows us to interact with the program as a whole.
+- Allows us to add family members interactively. 
 
 ## Results
 
@@ -140,11 +150,11 @@ Below is another output where the target person is **not** part of the family tr
 
 
 ## References
-
-1. Campbell, R. (2024). "Ch 8: Dynamic Programming." Week 10 Slides.
-2. Cave of Programming. (2021, March 27). Linking and Header Files | C++ For Java Devs Ep. 3 [Video]. YouTube. https://www.youtube.com/watch?v=w4gNct0QQIY
-3. Enzo Ti. (2012, January 8). How to print ascii art in c++? Cplusplus.com. https://cplusplus.com/forum/general/58945/
-4. GeeksforGeeks. (2023, May 15). Binary Search Tree in C++. GeeksforGeeks. https://www.geeksforgeeks.org/cpp-binary-search-tree/
-5. GeeksforGeeks. (2024, April 8). Binary Search Tree In Python. GeeksforGeeks. https://www.geeksforgeeks.org/binary-search-tree-in-python/
-6. GeeksforGeeks. (2023, July 10). Optimal Binary Search Tree: DP-24. GeeksforGeeks. www.geeksforgeeks.org/optimal-binary-search-tree-dp-24/
-7. W3Schools. (n.d.). C++ OOP (Object-Oriented Programming). W3Schools. https://www.w3schools.com/cpp/cpp_oop.asp
+1. Bunkai.Satori. (2011, February 22). Binary Search Tree Implementation in C++ STL? Stack Overflow. https://stackoverflow.com/questions/5085091/binary-search-tree-implementation-in-c-stl
+2. Campbell, R. (2024). "Ch 8: Dynamic Programming." Week 10 Slides.
+3. Cave of Programming. (2021, March 27). Linking and Header Files | C++ For Java Devs Ep. 3 [Video]. YouTube. https://www.youtube.com/watch?v=w4gNct0QQIY
+4. Enzo Ti. (2012, January 8). How to print ascii art in c++? Cplusplus.com. https://cplusplus.com/forum/general/58945/
+5. GeeksforGeeks. (2023, May 15). Binary Search Tree in C++. GeeksforGeeks. https://www.geeksforgeeks.org/cpp-binary-search-tree/
+6. GeeksforGeeks. (2024, April 8). Binary Search Tree In Python. GeeksforGeeks. https://www.geeksforgeeks.org/binary-search-tree-in-python/
+7. GeeksforGeeks. (2023, July 10). Optimal Binary Search Tree: DP-24. GeeksforGeeks. www.geeksforgeeks.org/optimal-binary-search-tree-dp-24/
+8. W3Schools. (n.d.). C++ OOP (Object-Oriented Programming). W3Schools. https://www.w3schools.com/cpp/cpp_oop.asp
