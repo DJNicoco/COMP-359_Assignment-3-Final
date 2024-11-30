@@ -4,7 +4,7 @@ Link to Github Repo: https://github.com/DJNicoco/COMP-359_Assignment-3-Final.git
 
 Our topic: Optimal shaped BSTs
 
-**Objectve:** This assignment involves implementing the dynamic programming approach to construct an optimal BST for a set of different inputs with probabilities. <br>
+**Objective:** This assignment involves implementing the dynamic programming approach to construct an optimal BST for a set of different inputs with probabilities. <br>
 
 ## Contributions:
 
