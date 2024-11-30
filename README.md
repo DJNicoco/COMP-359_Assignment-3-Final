@@ -84,7 +84,7 @@ Visualizes the OBST as an ASCII diagram. Each level of the tree is displayed hie
 
 ### Karan's Implementation (C++) <br>
 
-My part's implemenation demonstrates how to visualize a BST in the form of a family tree in C++ using a hierarchical structure. The family tree is implemented with a custom **FamilyTree** class and a **Person** struct - which further provides methods for adding family members and visualizing their respective relationhips. I decided to use the ASCII visualization approach to show how this type of BST would work. I also found that this simplifies the process a bit so it is easier to understand family relationships. 
+My part's implemenation demonstrates how to visualize a BST in the form of a family tree in C++ using a hierarchical structure. The family tree is implemented with a custom **FamilyTree** class and a **Person** struct - which further provides methods for adding family members and visualizing their respective relationhips. I decided to use the ASCII visualization approach to show how this type of BST would work. I also found that this simplifies the process a bit so it is easier to understand family relationships. There is also functionality to search for a family member in this tree. The structure of the tree can be balanced if we make it as such but we will assume the worst case that the tree is not balanced at all times. Hence, the worst-case search complexity of this BST is **O(n)** and the best-case is **O(log(n))**. 
 
 #### Key Components of CPP Program: <br>
 
@@ -100,7 +100,7 @@ The **FamilyTree** class gives functionality to:
 - Initialize a family tree with a root person. The root person can be a grandparent, great-grandparent, great-great-parent, great<sup>n</sup> grandparent etc (however far you'd like to go).
 - Add children to a specific parent.
 - Allows to create a visualization of the Family Tree using ASCII art for a more understandable representation of the familial heirarchy.
-- Using BST in-order search to find a person within the family tree.
+- Using BST pre-order search to find a person within the family tree.
 
 #### 3. FamilyTree.cpp file
 - This file consists of the implementation of the FamilyTree class methods which include:
