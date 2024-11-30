@@ -104,9 +104,9 @@ The **FamilyTree** class gives functionality to:
 
 #### 3. FamilyTree.cpp file
 - This file consists of the implementation of the FamilyTree class methods which include:
-      - Adding children
-      - Searching for individuals within the tree.
-      - Visualizing the family tree.
+  - Adding children
+  - Searching for individuals within the tree.
+  - Visualizing the family tree.
    
 #### 4. Main.cpp file
 - This file contains the main function which allows us to interact with the program as a whole.
