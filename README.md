@@ -110,7 +110,10 @@ The **FamilyTree** class gives functionality to:
    
 #### 4. Main.cpp file
 - This file contains the main function which allows us to interact with the program as a whole.
-- Allows us to add family members interactively. 
+- Allows us to add family members interactively.
+
+#### 5. Technology used: 
+- Visual Studio 2019
 
 ## Results
 
