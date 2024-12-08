@@ -4,7 +4,7 @@ import sys
 
 # This is the TreeNode class to represent nodes in a binary tree
 class TreeNode:
-    """A node in a binary tree."""
+    # A node in a binary tree
     def __init__(self, value, probability = 1.0):
         self.value = value
         self.probability = probability # This stores the probability associated with the node
@@ -98,7 +98,7 @@ class ColorCombinationTreeWithProbabilities:
         return None
 
     def hierarchical_layout(self, root):
-        """Creates a custom hierarchical layout for a tree with adjustable spacing."""
+        # Creates a custom hierarchical layout for a tree with adjustable spacing
         def traverse(node, x=0, depth=0, pos=None, width=1):
             if not pos:
                 pos = {}
@@ -139,7 +139,7 @@ class ColorCombinationTreeWithProbabilities:
         return color_map.get(color_name.lower(), '#FFFFFF')
 
     def add_edges_to_graph(self, node, G):
-        """Add the edges of a tree to the graph."""
+        # Add the edges of a tree to the graph
         if node:
             current_id = str(id(node))
             label = f"{node.value}\nP={node.probability:.2f}"
@@ -153,7 +153,7 @@ class ColorCombinationTreeWithProbabilities:
                 self.add_edges_to_graph(node.right, G)
 
     def visualize_tree(self, root, filename):
-        """Visualizes the tree and saves it as a PNG."""
+        # Visualizes the tree and saves it as a PNG
         G = nx.DiGraph()
         self.add_edges_to_graph(root, G)
 
@@ -213,16 +213,16 @@ class ColorCombinationTreeWithProbabilities:
 
         return round(dp[0][n - 1], 2), root # This returns the rounded minimal cost for the entire range
     
+    # Visualizing method to reconstruct the optimal BST
     def visualize_reconstructed_bst(self, root):
-        """Visualizes the reconstructed optimal BST and saves it as a separate PNG."""
+        # Visualizes the reconstructed optimal BST and saves it as a separate PNG
         filename = "reconstructed_optimal_bst"
         self.visualize_tree(root, filename)
         print(f"Reconstructed optimal BST saved as {filename}_tree.png")
 
-    
-
+    # Backtracking method to find all possible optimal BSTs based on the root table
     def backtrack_optimal_bst(self, root_table, i, j):
-        """Backtrack the root table to construct the optimal BST."""
+        # Backtrack the root table to construct the optimal BST
         if i > j:
             return None
         r = root_table[i][j]
