@@ -168,8 +168,8 @@ class ColorCombinationTreeWithProbabilities:
             with_labels=True,
             labels=labels,
             node_color=node_colors,
-            font_size=15,
-            node_size=3000,
+            font_size= 20,
+            node_size= 6000,
             font_color="black",
         )
         plt.title(f"Tree Visualization for {filename}")
@@ -181,37 +181,47 @@ class ColorCombinationTreeWithProbabilities:
     def visualize_full_bst(self, root):
         self.visualize_tree(root, "full_optimal_bst")
 
-    # This method computes the optimal BST cost using dynamic programming
+    # This method computes the optimal BST cost using dynamic programming following the algorithm from textbook
     def optimal_bst_probabilities_with_root_table(self, probs):
         n = len(probs)
-        # dp[i][j] will store the minimum cost of BST from i to j
-        dp = [[0] * n for _ in range(n)]
-        # sum_probs[i][j] will store the sum of probabilities from i to j
-        sum_probs = [[0] * n for _ in range(n)]
-        root = [[-1] * n for _ in range(n)]
 
-        # Calculate the sum of probabilities for ranges [i, j]
-        for i in range(n):
-            sum_probs[i][i] = probs[i]
-            for j in range(i + 1, n):
-                sum_probs[i][j] = sum_probs[i][j - 1] + probs[j]
+        # Initialize cost table C and root table R
+        C = [[0] * (n + 1) for _ in range(n + 1)]
+        R = [[0] * (n + 1) for _ in range(n + 1)]
 
-        # This fills the dp table for increasing lengths of subarrays
-        for length in range(1, n + 1):  # Length of the subarray
-            for i in range(n - length + 1):
-                j = i + length - 1  # end of the subarray
-                # This initializes dp[i][j] with a large number
-                dp[i][j] = sys.maxsize
-                # Try each node as the root
-                for r in range(i, j + 1):
-                    cost_left = dp[i][r - 1] if r > i else 0
-                    cost_right = dp[r + 1][j] if r < j else 0
-                    total_cost = cost_left + cost_right + sum_probs[i][j]
-                    if total_cost < dp[i][j]:
-                        dp[i][j] = total_cost
-                        root[i][j] = r
+        # Fill the diagonal of C with probabilities and set roots for single keys
+        for i in range(1, n + 1):
+            C[i][i - 1] = 0  # Empty subarray
+            C[i][i] = probs[i - 1]  # Diagonal elements (single keys)
+            R[i][i] = i  # Root of single key subarray
+        
 
-        return round(dp[0][n - 1], 2), root # This returns the rounded minimal cost for the entire range
+        # Fill C and R for increasing lengths of subarrays
+        for d in range(1, n):  # d is the diagonal offset
+            for i in range(1, n - d + 1):
+                j = i + d  # End of the subarray
+            
+                # Initialize minimum cost for range [i, j]
+                minval = sys.maxsize
+                kmin = -1
+
+                # Try all roots k in range [i, j]
+                for k in range(i, j + 1):
+                    cost_left = C[i][k - 1]
+                    cost_right = C[k + 1][j] if k + 1 <= n else 0
+                    total_cost = cost_left + cost_right
+
+                    if total_cost < minval:
+                        minval = total_cost
+                        kmin = k
+
+                # Compute total cost including probabilities
+                sum_probs = sum(probs[i - 1:j])
+                C[i][j] = minval + sum_probs
+                R[i][j] = kmin
+
+        # Return the rounded minimal cost and the root table
+        return round(C[1][n], 2), R
     
     # Visualizing method to reconstruct the optimal BST
     def visualize_reconstructed_bst(self, root):
