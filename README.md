@@ -125,22 +125,29 @@ The **FamilyTree** class gives functionality to:
 ### Nicole's Results (Python) <br>
 #### Output:
 Here is the optimal BST’s structure generated from the input data: <br>
-![image](https://github.com/user-attachments/assets/a9cfd6bc-3427-4f27-9161-4eae2f849000)
+![Screenshot 2024-12-11 165741](https://github.com/user-attachments/assets/cfb9c646-7016-4136-8aac-6b06205fe411)
+
 
 #### Input Colors and Probabilities: <br>
 These are the input values used in the algorithm to calculate the optimal BST: <br>
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/583ab9ba-af84-4897-a56a-1773398b2d85" width="45%" />
-  <img src="https://github.com/user-attachments/assets/c7ab033e-e12c-4bc0-948e-89ad9ea56cd2" width="45%" />
+  <img src="https://github.com/user-attachments/assets/d8bd4696-9737-4703-afd1-a0c00d70ed03" width="45%" />
+  <img src="https://github.com/user-attachments/assets/4d5d65fd-0179-4116-9401-a1146eac8424" width="45%" />
 </p>
+
+
 
 #### Full Binary Tree with Probabilities:
 This is the visualized optimal BST, showing how the colors combine with their probabilities: <br>
-![image](https://github.com/user-attachments/assets/6ac2ebf6-67d2-4bb4-8164-4b7033550d4f)
+![image](https://github.com/user-attachments/assets/3ec7497e-611f-408b-a85c-0b4d4349642d)
+
 
 #### Reconstructed Optimal BST with backtracking:
 This is the reconstructing of the Optimal BST using backtracking and visualizing the reconstructed optimal BST: <br>
-![image](https://github.com/user-attachments/assets/09b15d64-401f-4e1c-a22b-dbbf42baa44a)
+![image](https://github.com/user-attachments/assets/ec7ab555-f2ee-453d-8b0d-d1717642ede4)
+
+
+
 
 
 
